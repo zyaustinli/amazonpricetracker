@@ -4,7 +4,7 @@ from pprint import pprint
 import lxml
 import smtplib
 
-url = "https://www.amazon.co.uk/Redragon-M908-Precision-Programmable-Buttons/dp/B07FK9PKSM/ref=sr_1_1_sspa?crid=MO6GAHQA7O0U&keywords=redragon+mouse&qid=1693200534&s=computers&sprefix=redragon+mo%2Ccomputers%2C263&sr=1-1-spons&sp_csd=d2lkZ2V0TmFtZT1zcF9hdGY&psc=1"
+url = "https://www.amazon.com/Redragon-Impact-Buttons-Precision-Programmable/dp/B07HC4NBQ8/ref=sr_1_2_sspa?crid=1H2NRI3OK4OBD&keywords=redragon+mouse&qid=1693200779&sprefix=reddragon+%2Caps%2C451&sr=8-2-spons&sp_csd=d2lkZ2V0TmFtZT1zcF9hdGY&psc=1"
 
 headers = {
     "User-Agent": "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/116.0.0.0 Safari/537.36",
@@ -19,6 +19,7 @@ soup = BeautifulSoup(contents, "lxml")
 whole_price = float(soup.select_one(selector=".a-price-whole").getText())
 fraction_price = float(soup.select_one(selector=".a-price-fraction").getText())/100
 price = whole_price + fraction_price
+print(whole_price, fraction_price)
 
 target_price = 50
 if price <= target_price:
@@ -35,3 +36,4 @@ if price <= target_price:
             msg=f"Subject:Amazon Price Alert!\n\n{message}"
             .encode('utf-8')
         )
+        
